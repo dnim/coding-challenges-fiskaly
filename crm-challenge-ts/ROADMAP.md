@@ -1,0 +1,25 @@
+- [ ] General
+  - [ ] Add `customer-model` shared module
+  - [ ] Add module support to the app
+  - [ ] Update frontend with TS
+  - [ ] Add integration tests integration (`vitest`)
+  - [ ] Add e2e tests integration (`cypress`)
+- [ ] Backend
+  - [ ] Add migration support (flyway)
+  - [ ] Add sql script to normalize db (add `customer_tss` table, update existent data via temp table)
+  - [ ] Add endpoints (`getAll`, `create`, `addTss/:customer_id`)
+  - [ ] Add `pg-typed` lib
+  - [ ] Add business logic (get, create, update tss)
+- [ ] Frontend
+  - [ ] Add react query support for api
+  - [ ] Add API for front with use hook (`/create (POST)`, `/list (GET)`, `/new_tss/:customer_id (PUT)`)
+  - [ ] Add `mui` lib and basic UI (left menu: Customers `/Overview` `/Create` new `/Add TSS`)
+  - [ ] Add `Overview` page (table + search bar (fusejs) + pagination)
+  - [ ] Add `Create` page (formik + validation)
+- [ ] Additional improvements
+  - [ ] Add more caching + refactor
+  - [ ] Add lazy loading for customer list (i.e. do not load all data, but by page)
+  - [ ] Add server side search
+  - [ ] Add CI (git flow)
+  - [ ] Add type check + lint check
+  - [ ] Add more test!
