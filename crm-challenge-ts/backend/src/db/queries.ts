@@ -1,4 +1,4 @@
-import queryDb from './postgres';
+import queryDb from './queryDb';
 
 
 export function getCustomer(customer_id: string): Promise<string[]> {

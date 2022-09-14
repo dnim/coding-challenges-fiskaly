@@ -1,7 +1,8 @@
-CREATE TABLE customers(
+CREATE TABLE customers
+(
     customer_id uuid,
-    first_name text,
-    last_name text,
-    mail text,
-    tss_id uuid
+    first_name  TEXT,
+    last_name   TEXT,
+    mail        TEXT,
+    tss_id      uuid
 );

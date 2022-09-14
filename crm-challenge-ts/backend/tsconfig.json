@@ -7,6 +7,7 @@
     "noImplicitThis": true,
     "forceConsistentCasingInFileNames": true,
     "target": "ES2020",
+    "module": "ES2020",
     "skipLibCheck": true,
     "downlevelIteration": true,
     "sourceMap": true,
@@ -14,4 +15,3 @@
     "outDir": "./build/"
   }
 }
-  

@@ -1,13 +1,13 @@
 import config from '../config';
-import { Pool } from 'pg';
+import { Pool, PoolConfig } from 'pg';
 
 const v1: Pool = new Pool({
-    user: <string>config.PSQL_USER,
-    host: <string>config.PSQL_HOST,
-    database: <string>config.PSQL_DB,
-    password: <string>config.PSQL_PASSWORD,
-    port: <number>config.PSQL_PORT,
-  }
+    user: config.PSQL_USER,
+    host: config.PSQL_HOST,
+    database: config.PSQL_DB,
+    password: config.PSQL_PASSWORD,
+    port: config.PSQL_PORT,
+  } as PoolConfig
 );
 
 export default function queryDb(query: string):Promise<any[]> {
