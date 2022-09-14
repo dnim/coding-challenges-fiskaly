@@ -1,5 +1,4 @@
-export class GetCustomerDto {
-  id!: string;
+export class CustomerDto {
   firstName!: string;
   lastName!: string;
   mail!: string;

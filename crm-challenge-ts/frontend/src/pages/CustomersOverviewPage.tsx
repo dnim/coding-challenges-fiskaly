@@ -1,7 +1,7 @@
-import { Typography } from "@mui/material";
+import { CustomersTable } from "../components/CustomersTable";
 
 export const CustomersOverviewPage = (): JSX.Element => {
   return (
-    <Typography>CustomersOverviewPage</Typography>
+    <CustomersTable />
   )
 }

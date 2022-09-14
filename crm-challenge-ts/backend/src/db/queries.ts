@@ -1,6 +1,5 @@
 import queryDb from './queryDb';
-import { GetCustomerDto } from "../../customer-model/GetCustomerDto";
-
+import { GetCustomerDto } from "@fiskaly/customer-model";
 
 export function getCustomer(customer_id: string): Promise<string[]> {
   const queryString: string = `

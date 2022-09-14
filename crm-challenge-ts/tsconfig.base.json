@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@fiskaly/customer-model": ["customer-model/index.ts"],
+    }
+  },
+}

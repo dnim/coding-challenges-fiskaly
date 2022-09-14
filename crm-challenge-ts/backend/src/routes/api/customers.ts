@@ -1,7 +1,6 @@
 import { FastifyRequest, FastifyReply, FastifyInstance } from 'fastify';
 import { getCustomers } from '../../db/queries';
-import { GetCustomerDto } from "../../../customer-model/GetCustomerDto";
-
+import { GetCustomerDto } from "@fiskaly/customer-model";
 
 export default async function customers(fastify: FastifyInstance){
   fastify.route({
