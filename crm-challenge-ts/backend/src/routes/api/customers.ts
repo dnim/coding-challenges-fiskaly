@@ -1,11 +1,12 @@
 import { FastifyRequest, FastifyReply, FastifyInstance } from 'fastify';
-import { getCustomer } from '../../db/queries';
+import { getCustomers } from '../../db/queries';
+import { GetCustomerDto } from "../../../customer-model/GetCustomerDto";
 
 
-export default async function customer(fastify: FastifyInstance){
+export default async function customers(fastify: FastifyInstance){
   fastify.route({
-    method: 'POST',
-    url: '/customer',
+    method: 'GET',
+    url: '/api/customer',
     schema: {
       response: {
         200: {
@@ -26,13 +27,6 @@ export default async function customer(fastify: FastifyInstance){
           }
         }
       },
-      body: {
-        type: 'object',
-        properties: {
-          customer: { type: 'string' }
-        },
-        required: ['customer_id']
-      }
     },
     // this function is executed for every request before the handler is executed
     preHandler: (request: FastifyRequest, reply: FastifyReply, done) => {
@@ -40,12 +34,22 @@ export default async function customer(fastify: FastifyInstance){
       done();
     },
     handler: async (request: FastifyRequest, reply: FastifyReply) => {
-      // @ts-ignore
-      const customerId: string = request.body['customer_id'];
-      console.log(request.body);
-      const customerResult: string[] = await getCustomer(customerId);
+      const customersRawResult: any[] = await getCustomers();
 
-      reply.send(customerResult);
+      const customersResult = convertToDto(customersRawResult);
+
+      console.log({ customersResult })
+
+      reply.send(customersResult);
     }
   });
+}
+
+const convertToDto = (queryResult: any[]): GetCustomerDto[] => {
+  return queryResult.map(({ customer_id, first_name, last_name,mail }) => ({
+    id: customer_id,
+    firstName: first_name,
+    lastName: last_name,
+    mail
+  }))
 }

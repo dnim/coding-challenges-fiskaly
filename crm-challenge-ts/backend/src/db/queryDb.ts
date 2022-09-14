@@ -1,7 +1,7 @@
 import config from '../config';
 import { Pool, PoolConfig } from 'pg';
 
-const v1: Pool = new Pool({
+const client: Pool = new Pool({
     user: config.PSQL_USER,
     host: config.PSQL_HOST,
     database: config.PSQL_DB,
@@ -10,8 +10,8 @@ const v1: Pool = new Pool({
   } as PoolConfig
 );
 
-export default function queryDb(query: string):Promise<any[]> {
-  return v1.query(query)
+export default function queryDb(query: string, values?: any[]):Promise<any[]> {
+  return client.query(query, values)
     .then((res) => {
       return res.rows;
     })

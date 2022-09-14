@@ -1,14 +1,10 @@
 import './App.css';
-import HelloWorld from './helloWorld';
-import CustomerTable from './customerTable';
+import { MainLayout } from "./components/MainLayout";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <HelloWorld />
-        <CustomerTable />
-      </header>
+      <MainLayout />
     </div>
   );
 }
