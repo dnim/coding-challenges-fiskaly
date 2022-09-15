@@ -7,7 +7,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow,
+  TableRow, Tooltip,
   Typography
 } from "@mui/material";
 import { useCustomers } from "../api";
@@ -22,6 +22,21 @@ export const CustomersTable = (): JSX.Element => {
 
   const handleOnSearch = (searchEntry: string) => {
     setSearchTerm(searchEntry)
+  }
+
+  const renderTsss = (tsss: string[]) => {
+    const renderTooltipContent = () => {
+      return tsss.map((tss) => (
+        <div>{tss}</div>
+      ))
+    }
+    return tsss.length === 0 ? (
+      <Typography variant="subtitle2">--</Typography>
+    ) : (
+      <Tooltip placement="top" title={renderTooltipContent()}>
+       <Typography>{tsss.length}</Typography>
+      </Tooltip>
+    )
   }
 
   if (isError) {
@@ -56,14 +71,20 @@ export const CustomersTable = (): JSX.Element => {
               <TableCell>First name</TableCell>
               <TableCell>Last name</TableCell>
               <TableCell>E-mail</TableCell>
+              {/* TODO: changed naming after figuring out what TSS is that */}
+              <TableCell align="center">
+                <Typography variant="subtitle2">Connected TSSs count</Typography>
+                <Typography variant="subtitle2">(hover the number to see details)</Typography>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredResult?.length !== 0 ? filteredResult?.map(({ firstName, lastName, mail, id }) => (
+            {filteredResult?.length !== 0 ? filteredResult?.map(({ firstName, lastName, mail, id, tsss }) => (
               <TableRow key={id}>
                 <TableCell>{firstName}</TableCell>
                 <TableCell>{lastName}</TableCell>
                 <TableCell>{mail}</TableCell>
+                <TableCell align="center">{renderTsss(tsss)}</TableCell>
               </TableRow>
             )) : (
               <TableRow>
