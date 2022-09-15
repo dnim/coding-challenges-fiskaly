@@ -1,11 +1,17 @@
-import { GetCustomerDto, CreateCustomerDto } from "@fiskaly/customer-model";
+import { CreateCustomerDto, GetCustomerDto } from "@fiskaly/customer-model";
 import config from "../config";
+
+const baseUrl = `${config.BACKEND_URL}:${config.BACKEND_PORT}/api`
+
+const headers = new Headers({
+  'content-type': 'application/json'
+})
 
 export class CustomerApi {
 
   async get(): Promise<GetCustomerDto[]> {
     const result = await fetch(
-    `${getBaseUrl()}/customer`,
+      `${baseUrl}/customer`,
       {
         method: 'GET',
       }
@@ -15,16 +21,14 @@ export class CustomerApi {
 
   async create(data: CreateCustomerDto): Promise<GetCustomerDto> {
     const result = await fetch(
-      `${getBaseUrl()}/customer`,
+      `${baseUrl}/customer`,
       {
         method: 'POST',
         body: JSON.stringify(data),
+        headers
       }
     );
     return result.json();
   }
 }
 
-const getBaseUrl = () => {
-  return `${config.BACKEND_URL}:${config.BACKEND_PORT}/api`
-}

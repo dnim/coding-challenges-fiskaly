@@ -1,26 +1,28 @@
 import { Grid, Stack } from "@mui/material";
 import { Menu } from "./Menu";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { CustomersOverviewPage } from "../pages/CustomersOverviewPage";
 import { AddCustomerPage } from "../pages/AddCustomerPage";
 import { AddTssToCustomerPage } from "../pages/AddTssToCustomerPage";
+import { AppRoutes } from '../pages/routes'
 
 export const MainLayout = (): JSX.Element => {
   return (
     <Grid container sx={{
       height: '100%',
     }} spacing={2}>
-      <Grid item xs={3}>
+      <Grid item xs={2} sx={{
+        backgroundColor: '#e5e5e5'
+      }}>
         <Menu />
       </Grid>
-      <Grid item xs={9} sx={{
-        backgroundColor: 'yellow'
-      }}>
+      <Grid item xs={10}>
         <Stack>
           <Routes>
-            <Route path="/customers/list" element={<CustomersOverviewPage />}/>
-            <Route path="/customers/add" element={<AddCustomerPage />}/>
-            <Route path="/customers/tss-add" element={<AddTssToCustomerPage />}/>
+            <Route path="/" element={ <Navigate to={AppRoutes.customers} /> } />
+            <Route path={AppRoutes.customers} element={<CustomersOverviewPage />}/>
+            <Route path={AppRoutes.addCustomer} element={<AddCustomerPage />}/>
+            <Route path={AppRoutes.addTss} element={<AddTssToCustomerPage />}/>
           </Routes>
         </Stack>
       </Grid>

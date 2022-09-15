@@ -9,8 +9,8 @@ export const Menu = (): JSX.Element => {
   }
 
   return (
-    <Stack alignItems="start" gap={1} pl={2}>
-      <Typography variant="h3">Customers</Typography>
+    <Stack alignItems="start" p={2}>
+      <Typography variant="h5">Customers</Typography>
       <nav style={{ paddingLeft: 20 }} aria-label="secondary mailbox folders">
         <List>
           <ListItem disablePadding>
