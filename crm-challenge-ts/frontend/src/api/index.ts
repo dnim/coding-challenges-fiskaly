@@ -13,11 +13,12 @@ export const useCustomers = (): UseQueryResult<GetCustomerDto[]> => {
   return useQuery([CUSTOMERS_KEY], api.get)
 };
 
-export const useCreateCustomer = (): UseMutationResult<CreateCustomerDto, unknown, CreateCustomerDto> => {
+export const useCreateCustomer = (): UseMutationResult<{ id: string }, unknown, CreateCustomerDto> => {
   const queryClient = useQueryClient()
-  return useMutation<CreateCustomerDto, unknown, CreateCustomerDto>(api.create, {
-    onSuccess: async () => {
+  return useMutation<{ id: string }, unknown, CreateCustomerDto>(api.create, {
+    onSuccess: async (data) => {
       await queryClient.invalidateQueries([CUSTOMERS_KEY])
+      return data;
     },
   })
 };

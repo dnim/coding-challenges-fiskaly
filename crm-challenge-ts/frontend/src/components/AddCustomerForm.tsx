@@ -4,6 +4,7 @@ import { FormikHelpers, useFormik, } from 'formik';
 import { Button, Stack, Card, Typography } from "@mui/material";
 import * as yup from 'yup';
 import { FTextInput } from "./FTextInput";
+import { CONTENT_MAX_WIDTH } from "../utils/constants";
 
 export interface CustomerFormValues {
   firstName?: string;
@@ -51,8 +52,8 @@ export const AddCustomerForm: FC<Props> = ({ onSubmit }) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} style={{ maxWidth: 840 }}>
-      <Stack gap={3} justifyContent="space-between" pt={2}>
+    <form onSubmit={formik.handleSubmit}>
+      <Stack gap={2} justifyContent="space-between" p={4} sx={{ maxWidth: CONTENT_MAX_WIDTH }} >
         <Stack gap={2}>
           <Card sx={{ p: 3 }}>
             <Stack gap={2}>
@@ -95,7 +96,7 @@ export const AddCustomerForm: FC<Props> = ({ onSubmit }) => {
             type="submit"
             disabled={formik.isSubmitting}
           >
-            {formik.isSubmitting ? 'Saving' : 'Save'}
+            {formik.isSubmitting ? 'Saving' : 'Add customer'}
           </Button>
         </Stack>
       </Stack>

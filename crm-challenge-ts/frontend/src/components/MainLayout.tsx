@@ -5,6 +5,7 @@ import { CustomersOverviewPage } from "../pages/CustomersOverviewPage";
 import { AddCustomerPage } from "../pages/AddCustomerPage";
 import { AddTssToCustomerPage } from "../pages/AddTssToCustomerPage";
 import { AppRoutes } from '../pages/routes'
+import { MAIN_COLOR } from "../utils/constants";
 
 export const MainLayout = (): JSX.Element => {
   return (
@@ -12,7 +13,7 @@ export const MainLayout = (): JSX.Element => {
       height: '100%',
     }} spacing={2}>
       <Grid item xs={2} sx={{
-        backgroundColor: '#e5e5e5'
+        backgroundColor: MAIN_COLOR
       }}>
         <Menu />
       </Grid>
