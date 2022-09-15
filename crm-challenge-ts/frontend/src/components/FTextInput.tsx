@@ -10,7 +10,7 @@ interface IProps<V> extends StandardTextFieldProps {
   formik: FormikProps<V>;
 }
 
-export const FTextInput = <_ extends string, V>({
+export const FTextInput = <FieldName extends string, V>({
                                                   name,
                                                   formik,
                                                   ...props

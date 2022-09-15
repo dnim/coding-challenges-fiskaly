@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
 import customers from './customers';
-import createCustomer from './createCustomer';
+import addCustomer from './addCustomer';
 
 declare module 'fastify' {
     interface FastifyInstance {
@@ -9,5 +9,5 @@ declare module 'fastify' {
 
 export default async function(fastify: FastifyInstance) {
     fastify.register(customers);
-    fastify.register(createCustomer);
+    fastify.register(addCustomer);
 }
