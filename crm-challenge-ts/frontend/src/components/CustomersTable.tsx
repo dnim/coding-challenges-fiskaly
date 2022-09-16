@@ -1,5 +1,5 @@
 import {
-  Box,
+  Box, Button,
   Paper,
   Stack,
   Table,
@@ -10,18 +10,27 @@ import {
   TableRow, Tooltip,
   Typography
 } from "@mui/material";
-import { useCustomers } from "../api";
+import { useAddTssToCustomer, useCustomers } from "../api";
 import { CONTENT_MAX_WIDTH, MAIN_COLOR } from "../utils/constants";
 import { SearchBar } from "./SearchBar";
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 export const CustomersTable = (): JSX.Element => {
   const { data: customers, isLoading, isError } = useCustomers();
+  const { mutate: addTssToCustomer } = useAddTssToCustomer();
 
   const [searchTerm, setSearchTerm] = useState('')
 
   const handleOnSearch = (searchEntry: string) => {
     setSearchTerm(searchEntry)
+  }
+
+  const handleAddTssToCustomer = async (customerId: string) => {
+    await addTssToCustomer({
+      customerId,
+      tssId: uuidv4(),
+    });
   }
 
   const renderTsss = (tsss: string[]) => {
@@ -76,6 +85,7 @@ export const CustomersTable = (): JSX.Element => {
                 <Typography variant="subtitle2">Connected TSSs count</Typography>
                 <Typography variant="subtitle2">(hover the number to see details)</Typography>
               </TableCell>
+              <TableCell>Add random TSS</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -85,6 +95,9 @@ export const CustomersTable = (): JSX.Element => {
                 <TableCell>{lastName}</TableCell>
                 <TableCell>{mail}</TableCell>
                 <TableCell align="center">{renderTsss(tsss)}</TableCell>
+                <TableCell align="center">
+                  <Button onClick={() => handleAddTssToCustomer(id)}>Add TSS</Button>
+                </TableCell>
               </TableRow>
             )) : (
               <TableRow>

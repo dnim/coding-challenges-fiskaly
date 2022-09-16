@@ -6,6 +6,7 @@ import { AppRoutes } from "./routes";
 
 export const AddCustomerPage = (): JSX.Element => {
 
+  // TODO: provide callback to onSuccess method to display created customer id
   const { mutate: createCustomer } = useCreateCustomer();
   const navigate = useNavigate();
 

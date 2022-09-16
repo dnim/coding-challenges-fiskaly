@@ -1,11 +1,11 @@
 import { FastifyRequest, FastifyReply, FastifyInstance } from 'fastify';
-import { createCustomer } from '../../db/queries';
-import { CreateCustomerDto } from "@fiskaly/customer-model";
+import { connectTssAndCustomer } from '../../db/queries';
+import { AddTssToCustomerDto } from "@fiskaly/customer-model";
 
-export default async function addCustomer(fastify: FastifyInstance){
+export default async function addTssToCustomer(fastify: FastifyInstance){
   fastify.route({
     method: 'POST',
-    url: '/api/customer',
+    url: '/api/customer/:customerId/add-tss',
     schema: {
       response: {
         200: {
@@ -18,9 +18,8 @@ export default async function addCustomer(fastify: FastifyInstance){
       body: {
         type: 'object',
         properties: {
-          firstName: { type: 'string' },
-          lastName: { type: 'string' },
-          mail: { type: 'string' },
+          customerId: { type: 'string', format: 'uuid' },
+          tssId: { type: 'string', format: 'uuid' },
         },
       }
     },
@@ -28,7 +27,7 @@ export default async function addCustomer(fastify: FastifyInstance){
       done();
     },
     handler: async (request: FastifyRequest, reply: FastifyReply) => {
-      const customerResult: { customerId: string } = await createCustomer(request.body as CreateCustomerDto);
+      const customerResult: { customerId: string } = await connectTssAndCustomer(request.body as AddTssToCustomerDto);
       reply.send(customerResult);
     }
   });

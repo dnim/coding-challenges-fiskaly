@@ -29,14 +29,6 @@ export const Menu = (): JSX.Element => {
               Add customer
             </StyledNavLink>
           </ListItem>
-          <ListItem disablePadding>
-            <StyledNavLink
-              to="/customers/tss-add"
-              style={getStyle}
-            >
-              Add TSS
-            </StyledNavLink>
-          </ListItem>
         </List>
       </nav>
     </Stack>

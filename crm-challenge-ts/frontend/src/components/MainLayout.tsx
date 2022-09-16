@@ -3,7 +3,6 @@ import { Menu } from "./Menu";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { CustomersOverviewPage } from "../pages/CustomersOverviewPage";
 import { AddCustomerPage } from "../pages/AddCustomerPage";
-import { AddTssToCustomerPage } from "../pages/AddTssToCustomerPage";
 import { AppRoutes } from '../pages/routes'
 import { MAIN_COLOR } from "../utils/constants";
 
@@ -23,7 +22,6 @@ export const MainLayout = (): JSX.Element => {
             <Route path="/" element={ <Navigate to={AppRoutes.customers} /> } />
             <Route path={AppRoutes.customers} element={<CustomersOverviewPage />}/>
             <Route path={AppRoutes.addCustomer} element={<AddCustomerPage />}/>
-            <Route path={AppRoutes.addTss} element={<AddTssToCustomerPage />}/>
           </Routes>
         </Stack>
       </Grid>
