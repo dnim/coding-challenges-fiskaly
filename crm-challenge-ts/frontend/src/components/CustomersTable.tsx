@@ -10,17 +10,27 @@ import {
   TableRow, Tooltip,
   Typography
 } from "@mui/material";
-import { useAddTssToCustomer, useCustomers } from "../api";
+import { isResponseError, useAddTssToCustomer, useCustomers } from "../api";
 import { CONTENT_MAX_WIDTH, MAIN_COLOR } from "../utils/constants";
 import { SearchBar } from "./SearchBar";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
-export const CustomersTable = (): JSX.Element => {
-  const { data: customers, isLoading, isError } = useCustomers();
-  const { mutate: addTssToCustomer } = useAddTssToCustomer();
+interface CustomersTableProps {
+  handleErrorNotification: (error: string) => void
+  handleSuccessNotification: (message: string) => void
+}
 
+export const CustomersTable = ({ handleErrorNotification, handleSuccessNotification }: CustomersTableProps ): JSX.Element => {
   const [searchTerm, setSearchTerm] = useState('')
+  const { data: customers, isLoading, isError } = useCustomers();
+  const { mutate: addTssToCustomer } = useAddTssToCustomer((data) => {
+    if (isResponseError(data)) {
+      handleErrorNotification(data.error);
+    } else {
+      handleSuccessNotification(`New TSS ${data.tssId} was added to the customer ${data.customerId}`);
+    }
+  });
 
   const handleOnSearch = (searchEntry: string) => {
     setSearchTerm(searchEntry)
@@ -83,7 +93,7 @@ export const CustomersTable = (): JSX.Element => {
               {/* TODO: changed naming after figuring out what TSS is that */}
               <TableCell align="center">
                 <Typography variant="subtitle2">Connected TSSs count</Typography>
-                <Typography variant="subtitle2">(hover the number to see details)</Typography>
+                <Typography variant="subtitle2">(hover the number to see the details)</Typography>
               </TableCell>
               <TableCell>Add random TSS</TableCell>
             </TableRow>

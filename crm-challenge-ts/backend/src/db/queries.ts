@@ -1,6 +1,6 @@
 import queryDb from './queryDb';
-import { AddTssToCustomerDto, CreateCustomerDto } from "@fiskaly/customer-model";
-import { GetCustomerQueryResult } from "../routes/api/customers";
+import type { AddTssResponse, AddTssToCustomerDto, CreateCustomerDto } from "@fiskaly/customer-model";
+import type { GetCustomerQueryResult } from "../routes/api/customers";
 
 export async function getCustomers(): Promise<GetCustomerQueryResult[]> {
   const queryString: string = `
@@ -29,12 +29,13 @@ export async function createCustomer({
 export async function connectTssAndCustomer({
                                               customerId,
                                               tssId
-                                            }: AddTssToCustomerDto): Promise<{ customerId: string }> {
+                                            }: AddTssToCustomerDto): Promise<AddTssResponse> {
   const queryString: string = `
       INSERT INTO customers_tss (customer_id, tss_id)
       VALUES ($1, $2)
-      RETURNING customer_id
+      RETURNING *
   `;
   const result = await queryDb(queryString, [customerId, tssId]);
-  return { customerId: result[0].customer_id };
+  const { customer_id, tss_id } = result[0]
+  return { customerId: customer_id, tssId: tss_id };
 }

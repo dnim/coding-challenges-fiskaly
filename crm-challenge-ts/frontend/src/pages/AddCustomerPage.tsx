@@ -12,7 +12,7 @@ export const AddCustomerPage = (): JSX.Element => {
 
   const handleNewCustomerSubmit = async (customer: CustomerFormValues) => {
     await createCustomer(customer as CreateCustomerDto);
-    navigate(AppRoutes.customers, { state: { newCustomerWasAdded: true } })
+    navigate(AppRoutes.customers, { state: { successfulNotification: 'The new customer was successfully added!' } })
   }
 
   return (

@@ -1,21 +1,21 @@
 - [ ] General
-  - [ ] Add `customer-model` shared module
-  - [ ] Add module support to the app
+  - [x] Add `customer-model` shared module
+  - [x] Add module support to the app
   - [x] Update frontend with TS
   - [ ] Add integration tests integration (`vitest`)
   - [ ] Add e2e tests integration (`cypress`)
-- [ ] Backend
+- [x] Backend
   - [x] Add migration support
   - [x] Add sql script to normalize db (add `customer_tss` table, update existent data via temp table)
-  - [ ] Add endpoints (`getAll`, `create`, `addTss/:customer_id`)
-  - [ ] Add `pg-typed` lib
-  - [ ] Add business logic (get, create, update tss)
-- [ ] Frontend
-  - [ ] Add react query support for api
-  - [ ] Add API for front with use hook (`/create (POST)`, `/list (GET)`, `/new_tss/:customer_id (PUT)`)
+  - [x] Add endpoints (`getAll`, `create`, `addTss/:customer_id`)
+  - [x] ~~Add `pg-typed` lib~~
+  - [x] Add business logic (get, create, update tss)
+- [x] Frontend
+  - [x] Add react query support for api
+  - [x] Add API for front with use hook (`/create (POST)`, `/list (GET)`, `/new_tss/:customer_id (POST)`)
   - [x] Add `mui` lib and basic UI (left menu: Customers `/Overview` `/Create` new `/Add TSS`)
-  - [ ] Add `Overview` page (table + search bar (fusejs) + pagination)
-  - [ ] Add `Create` page (formik + validation)
+  - [x] Add `Overview` page (table + search bar ~~(fusejs) + pagination~~)
+  - [x] Add `Create` page (formik + validation)
 - [ ] Additional improvements
   - [ ] Add more caching + refactor
   - [ ] Add lazy loading for customer list (i.e. do not load all data, but by page)

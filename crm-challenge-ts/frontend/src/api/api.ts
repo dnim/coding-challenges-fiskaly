@@ -1,6 +1,5 @@
-import { AddTssToCustomerDto, CreateCustomerDto, GetCustomerDto } from "@fiskaly/customer-model";
+import { AddTssResponse, AddTssToCustomerDto, CreateCustomerDto, GetCustomerDto } from "@fiskaly/customer-model";
 import config from "../config";
-import { AddTssResponse } from "./index";
 
 const baseUrl = `${config.BACKEND_URL}:${config.BACKEND_PORT}/api`
 

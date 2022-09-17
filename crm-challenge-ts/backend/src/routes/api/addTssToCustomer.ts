@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply, FastifyInstance } from 'fastify';
 import { connectTssAndCustomer } from '../../db/queries';
-import { AddTssToCustomerDto } from "@fiskaly/customer-model";
+import { AddTssResponse, AddTssToCustomerDto } from "@fiskaly/customer-model";
 
 export default async function addTssToCustomer(fastify: FastifyInstance){
   fastify.route({
@@ -10,6 +10,10 @@ export default async function addTssToCustomer(fastify: FastifyInstance){
       response: {
         200: {
           customerId: {
+            type: 'string',
+            format: 'uuid',
+          },
+          tssId: {
             type: 'string',
             format: 'uuid',
           },
@@ -23,12 +27,22 @@ export default async function addTssToCustomer(fastify: FastifyInstance){
         },
       }
     },
-    preHandler: (request: FastifyRequest, reply: FastifyReply, done) => {
+    preHandler: (_request: FastifyRequest, _reply: FastifyReply, done) => {
       done();
     },
     handler: async (request: FastifyRequest, reply: FastifyReply) => {
-      const customerResult: { customerId: string } = await connectTssAndCustomer(request.body as AddTssToCustomerDto);
-      reply.send(customerResult);
+      try {
+        const customerResult: AddTssResponse = await connectTssAndCustomer(request.body as AddTssToCustomerDto);
+        reply.send(customerResult);
+      } catch (error: any) {
+        // TODO: not the best approach, but just for demonstration. Proper error handling system should be introduced.
+        if (error?.detail?.includes('is not present in table')) {
+          reply.status(404);
+          reply.send({ error: 'The customer not found.' });
+        } else {
+          throw new Error(error)
+        }
+      }
     }
   });
 }

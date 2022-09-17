@@ -1,23 +1,38 @@
 import { CustomersTable } from "../components/CustomersTable";
 import { useLocation, } from "react-router-dom";
-import { Alert } from "@mui/material";
+import { Alert, Stack } from "@mui/material";
 import { useState } from "react";
 
 export const CustomersOverviewPage = (): JSX.Element => {
 
   const { state } = useLocation();
-  const [displayNotification, setDisplayNotification]  = useState(state?.newCustomerWasAdded ?? false)
+  const [displayNotification, setDisplayNotification]  =
+    useState<string | undefined>(state?.successfulNotification ?? undefined)
+  const [displayErrorNotification, setDisplayErrorNotification]  = useState<string | undefined>(undefined)
 
   const handleCloseNotification = () => {
-    setDisplayNotification(false)
+    setDisplayNotification(undefined);
+    setDisplayErrorNotification(undefined);
+    window.history.replaceState({}, document.title);
   }
-  return (
-    <>
-      {displayNotification && (
-        <Alert onClose={handleCloseNotification}>The new customer was successfully added!</Alert>
-      )}
-      <CustomersTable />
-    </>
 
+  const handleErrorNotification = (error: string) => {
+    setDisplayErrorNotification(error);
+  }
+
+  const handleSuccessNotification = (message: string) => {
+    setDisplayNotification(message);
+  }
+
+  return (
+    <Stack maxWidth={840}>
+      {displayNotification && (
+        <Alert severity="success" onClose={handleCloseNotification}>{displayNotification}</Alert>
+      )}
+      {displayErrorNotification && (
+        <Alert severity="error" onClose={handleCloseNotification}>{displayErrorNotification}</Alert>
+      )}
+      <CustomersTable handleErrorNotification={handleErrorNotification} handleSuccessNotification={handleSuccessNotification} />
+    </Stack>
   )
 }
