@@ -9,7 +9,8 @@
     "dev": "ts-node-dev --respawn src/server.ts",
     "start": "node --es-module-specifier-resolution=node build/server.js",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --fix --ext .ts"
+    "lint:fix": "eslint . --fix --ext .ts",
+    "migrate": "npm run build && node initMigration.js"
   },
   "engines": {
     "node": ">15.13"
@@ -48,7 +49,8 @@
     "http-errors": "^1.8.1",
     "make-promises-safe": "^5.1.0",
     "pg": "^8.8.0",
-    "pg-format": "^1.0.4"
+    "pg-format": "^1.0.4",
+    "postgrator": "^7.1.0"
   },
   "prettier": {
     "arrowParens": "always",

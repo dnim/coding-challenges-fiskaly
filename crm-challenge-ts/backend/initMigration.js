@@ -1,6 +1,6 @@
 import pg from "pg";
 import Postgrator from "postgrator";
-import config from '../backend/build/backend/src/config.js'; // TODO: yep, it's hacky and need to be adjusted
+import config from './build/backend/src/config.js'; // TODO: yep, it's hacky and need to be adjusted
 
 async function doMigration() {
   const client = new pg.Client({
