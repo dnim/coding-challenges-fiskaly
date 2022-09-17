@@ -21,6 +21,7 @@ services:
     environment:
       - HOST=0.0.0.0
       - PORT=3001
+      - PSQL_HOST=database
     depends_on:
       - database
   frontend:
