@@ -24,6 +24,7 @@ interface CustomersTableProps {
 export const CustomersTable = ({ handleErrorNotification, handleSuccessNotification }: CustomersTableProps ): JSX.Element => {
   const [searchTerm, setSearchTerm] = useState('')
   const { data: customers, isLoading, isError } = useCustomers();
+
   const { mutate: addTssToCustomer } = useAddTssToCustomer((data) => {
     if (isResponseError(data)) {
       handleErrorNotification(data.error);

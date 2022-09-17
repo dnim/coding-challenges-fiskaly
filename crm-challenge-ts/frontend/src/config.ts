@@ -1,4 +1,4 @@
-import * as envSchema from 'env-schema';
+import envSchema from 'env-schema';
 
 const config =  {
   VERSION: {
